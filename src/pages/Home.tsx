@@ -1,3 +1,7 @@
-export default function Home() {
-	return <>dsd</>;
-}
+import { CallToAction } from '../components';
+
+const Home = () => {
+	return <CallToAction></CallToAction>;
+};
+
+export default Home;

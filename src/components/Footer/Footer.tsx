@@ -2,7 +2,7 @@ import { Container, Copyright, IconFacebook, IconInstagram, Logo, SocialContaine
 
 const Footer = () => {
 	return (
-		<>
+		<footer>
 			<Container>
 				<Logo>Commis</Logo>
 				<Copyright>© 2021 Commis</Copyright>
@@ -11,7 +11,7 @@ const Footer = () => {
 					<IconInstagram></IconInstagram>
 				</SocialContainer>
 			</Container>
-		</>
+		</footer>
 	);
 };
 
