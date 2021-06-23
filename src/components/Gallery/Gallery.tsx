@@ -1,3 +1,8 @@
+import { observer } from 'mobx-react';
+import recipe from '../../stores/Recipe.store';
+import { Link } from 'react-router-dom';
+
+import { Filter } from '../';
 import {
 	Container,
 	GridContainer,
@@ -8,15 +13,7 @@ import {
 	RelativeOverlay,
 	AbsoluteOverlay,
 } from './styled';
-
-import { Filter } from '../';
-
-import { observer } from 'mobx-react';
-
-import { getRecipesByIngredients } from '../../services/api';
-
-import recipe from '../../stores/Recipe.store';
-import { Link } from 'react-router-dom';
+import { timeOptions } from '../../utils/constants';
 
 const Gallery = observer(() => {
 	return (
@@ -25,8 +22,7 @@ const Gallery = observer(() => {
 				<InputForm
 					onSubmit={async (e) => {
 						e.preventDefault();
-						const data = await getRecipesByIngredients(recipe.query);
-						recipe.setData(data);
+						recipe.fetchData(recipe.query);
 					}}
 				>
 					<Input
@@ -38,8 +34,7 @@ const Gallery = observer(() => {
 					></Input>
 				</InputForm>
 			</InputWrapper>
-			<Filter section='Quanto tempo hai per cucinare?' onChange={recipe.setTime} />
-			{console.log(recipe.time)}
+			<Filter section='Quanto tempo hai per cucinare?' onChange={recipe.setTime} options={timeOptions} />
 			<GridContainer>
 				{recipe.data &&
 					recipe.data
@@ -53,7 +48,7 @@ const Gallery = observer(() => {
 										<AbsoluteOverlay $small={false} key={key}>
 											{item.title}
 										</AbsoluteOverlay>
-										<Image src={item.image} alt='' width='450' />
+										<Image src={item.image} width='450' />
 									</Link>
 								</RelativeOverlay>
 							) : null;

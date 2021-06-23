@@ -1,4 +1,5 @@
 import { action, makeAutoObservable } from 'mobx';
+import { getRecipesByIngredients } from '../services/api';
 
 class RecipeStore {
 	query: string = '';
@@ -15,8 +16,8 @@ class RecipeStore {
 	};
 
 	@action
-	setData = (data: any[]) => {
-		this.data = data;
+	fetchData = async (query: string) => {
+		this.data = await getRecipesByIngredients(query);
 	};
 
 	@action

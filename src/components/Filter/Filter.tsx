@@ -4,25 +4,7 @@ import { observer } from 'mobx-react';
 
 import recipe from '../../stores/Recipe.store';
 
-const Filter = observer(({ section, onChange }: any) => {
-	const options = [
-		{
-			name: '< 15 min',
-			value: 10,
-		},
-		{
-			name: '< 40 min',
-			value: 20,
-		},
-		{
-			name: '< 60 min',
-			value: 30,
-		},
-		{
-			name: '< 120 min',
-			value: 120,
-		},
-	];
+const Filter = observer(({ section, onChange, options }: any) => {
 	return (
 		<Label>
 			{section}
