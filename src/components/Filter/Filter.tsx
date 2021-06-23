@@ -1,10 +1,10 @@
+import { observer } from 'mobx-react';
+import recipe from '../../stores/Recipe.store';
+import { IOptions } from '../../utils/types';
+
 import { Label, Select } from './styled';
 
-import { observer } from 'mobx-react';
-
-import recipe from '../../stores/Recipe.store';
-
-const Filter = observer(({ section, onChange, options }: any) => {
+const Filter = observer(({ section, onChange, options }: { section: string; onChange: any; options: IOptions }) => {
 	return (
 		<Label>
 			{section}

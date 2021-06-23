@@ -14,6 +14,7 @@ import {
 	AbsoluteOverlay,
 } from './styled';
 import { timeOptions } from '../../utils/constants';
+import { IRecipe } from '../../utils/types';
 
 const Gallery = observer(() => {
 	return (
@@ -38,10 +39,10 @@ const Gallery = observer(() => {
 			<GridContainer>
 				{recipe.data &&
 					recipe.data
-						.filter((item: any) => {
+						.filter((item: IRecipe) => {
 							return item.time <= recipe.time;
 						})
-						.map((item: any, key: number) => {
+						.map((item: IRecipe, key: number) => {
 							return key !== recipe.data.length - 1 ? (
 								<RelativeOverlay>
 									<Link to={`/recipe/${item._id}`}>

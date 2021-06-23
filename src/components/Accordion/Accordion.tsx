@@ -3,7 +3,7 @@ import { BorderContainer, Button, Content, Title, Wrapper } from './styled';
 
 import { useState } from 'react';
 
-const Accordion = observer(({ section, content }: any) => {
+const Accordion = observer(({ section, content }: { section: string; content: Array<object> }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
