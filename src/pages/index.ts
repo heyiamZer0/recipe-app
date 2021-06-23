@@ -1,6 +1,6 @@
-import Home from './Home';
-import WhatWeDo from './WhatWeDo';
-import Recipes from './Recipes';
-import Recipe from './Recipe';
+import HomePage from './HomePage';
+import StepsPage from './StepsPage';
+import GalleryPage from './GalleryPage';
+import RecipePage from './RecipePage';
 
-export { Home, WhatWeDo, Recipes, Recipe };
+export { HomePage, StepsPage, GalleryPage, RecipePage };

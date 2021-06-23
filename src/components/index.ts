@@ -3,7 +3,7 @@ import Footer from './Footer/Footer';
 import CallToAction from './CallToAction/CallToAction';
 import Steps from './Steps/Steps';
 import Gallery from './Gallery/Gallery';
-import Model from './Model/Model';
-import Filter from './Filter/Filter';
+import RecipeModel from './RecipeModel/RecipeModel';
+import Filter from './FilterBox/Filter';
 
-export { Header, Footer, CallToAction, Steps, Gallery, Model, Filter };
+export { Header, Footer, CallToAction, Steps, Gallery, RecipeModel, Filter };

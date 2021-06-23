@@ -1,7 +1,7 @@
 import { Steps } from '../components';
 
-const WhatWeDo = () => {
+const StepsPage = () => {
 	return <Steps></Steps>;
 };
 
-export default WhatWeDo;
+export default StepsPage;

@@ -1,6 +1,9 @@
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 import recipe from '../../stores/Recipe.store';
+import { IDescription, IIngredient } from '../../utils/types';
 import Accordion from '../Accordion/Accordion';
+import { AbsoluteOverlay, RelativeOverlay, Image } from '../Gallery/styled';
 import {
 	Category,
 	Container,
@@ -13,11 +16,6 @@ import {
 	ButtonWrapper,
 	FlexWrapper,
 } from './styled';
-
-import { AbsoluteOverlay, RelativeOverlay, Image } from '../Gallery/styled';
-
-import { Link } from 'react-router-dom';
-import { IDescription, IIngredient } from '../../utils/types';
 
 const recipeDetails = (props: any) => {
 	return recipe.data
@@ -58,7 +56,7 @@ const recipeDetails = (props: any) => {
 		});
 };
 
-const Model = observer((props: any) => {
+const RecipeModel = observer((props: any) => {
 	return (
 		<Container>
 			<ResponsiveContainer>
@@ -92,4 +90,4 @@ const Model = observer((props: any) => {
 	);
 });
 
-export default Model;
+export default RecipeModel;

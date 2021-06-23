@@ -21,7 +21,7 @@ const CallToAction = () => {
 						</Title>
 					</TitleWrapper>
 					<ButtonWrapper>
-						<a href='/whatwedo'>
+						<a href='/steps'>
 							<Button>Inizia da qui</Button>
 						</a>
 					</ButtonWrapper>

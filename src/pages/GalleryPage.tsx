@@ -1,7 +1,7 @@
 import { Gallery } from '../components';
 
-const Recipes = () => {
+const GalleryPage = () => {
 	return <Gallery></Gallery>;
 };
 
-export default Recipes;
+export default GalleryPage;

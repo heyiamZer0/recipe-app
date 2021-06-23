@@ -9,6 +9,7 @@ export interface IIngredient {
 	ingredient: string;
 	quantity: string;
 }
+export interface IIngredients extends Array<IIngredient> {}
 
 export interface IDescription {
 	step: number;
@@ -16,8 +17,6 @@ export interface IDescription {
 }
 
 export interface IDescriptions extends Array<IDescription> {}
-
-export interface IIngredients extends Array<IIngredient> {}
 
 export interface IRecipe {
 	_id: string;

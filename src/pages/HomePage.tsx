@@ -1,7 +1,7 @@
 import { CallToAction } from '../components';
 
-const Home = () => {
+const HomePage = () => {
 	return <CallToAction></CallToAction>;
 };
 
-export default Home;
+export default HomePage;
