@@ -1,17 +1,8 @@
-import { action, makeAutoObservable } from 'mobx';
-import { getRecipesByID } from '../services/api';
+import { makeAutoObservable } from 'mobx';
 
 class ModelStore {
 	recipe: any = [];
-	accordionTitles: any = [];
 	id: string = '';
-	isOpen: any = '';
-	title: string = '';
-	content: string = '';
-
-	toggleAccordion() {
-		this.isOpen = !this.isOpen;
-	}
 
 	setID = (id: string) => {
 		this.id = id;
@@ -19,15 +10,6 @@ class ModelStore {
 
 	constructor() {
 		makeAutoObservable(this);
-	}
-
-	getModel = (data: any) => {
-		this.recipe = data;
-	};
-
-	@action
-	async setModel() {
-		this.recipe = await getRecipesByID(this.id);
 	}
 }
 

@@ -45,7 +45,9 @@ const Gallery = observer(() => {
 							return (
 								<RelativeOverlay>
 									<Link to={`/recipe/${item._id}`}>
-										<AbsoluteOverlay key={key}>{item.title}</AbsoluteOverlay>
+										<AbsoluteOverlay $small={false} key={key}>
+											{item.title}
+										</AbsoluteOverlay>
 										<Image src={item.image} alt='' width='450' />
 									</Link>
 								</RelativeOverlay>

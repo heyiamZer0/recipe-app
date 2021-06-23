@@ -61,3 +61,34 @@ export const Image = tw.img`
     mx-auto
     rounded-md
 `;
+
+export const FlexWrapper = tw.div`
+    flex
+    flex-row
+    rounded-md
+    overflow-hidden
+`;
+
+export const ButtonWrapper = tw.div`
+    mt-10
+    flex
+    justify-center
+    items-center
+`;
+
+export const Button = tw.button`
+    infline-flex
+    items-center
+    rounded
+    border
+    focus:outline-none
+    border-red-500 
+    text-red-500
+    hover:bg-red-500
+    hover:text-white
+    h-12
+    py-1
+    px-3
+    mt-4
+    md:mt-0
+`;

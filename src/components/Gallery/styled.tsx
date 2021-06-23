@@ -1,5 +1,9 @@
 import tw from 'tailwind-styled-components';
 
+interface OverlayProps {
+	$small: boolean;
+}
+
 export const Container = tw.div`
     container
     flex
@@ -47,14 +51,16 @@ export const GridContainer = tw.div`
     border-t-2
 `;
 
-export const AbsoluteOverlay = tw.div`
+export const AbsoluteOverlay = tw.div<OverlayProps>`
+
+${(div) => (div.$small ? 'text-xs' : 'text-xl')}
+
     absolute
     bg-white
     inset-0
     z-10
     flex
     justify-center
-    text-xl
     items-center
     text-center
     opacity-0

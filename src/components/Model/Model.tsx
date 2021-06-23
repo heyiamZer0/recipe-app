@@ -1,31 +1,40 @@
 import { observer } from 'mobx-react';
-import Accordion from '../Accordion/Accordion';
-import { Category, Container, Description, HeaderContainer, Image, ResponsiveContainer, Title } from './styled';
-
-import model from '../../stores/Model.store';
 import recipe from '../../stores/Gallery.store';
+import Accordion from '../Accordion/Accordion';
+import {
+	Category,
+	Container,
+	Description,
+	HeaderContainer,
+	Image as HeaderImage,
+	ResponsiveContainer,
+	Title,
+	Button,
+	ButtonWrapper,
+	FlexWrapper,
+} from './styled';
 
-const Model = observer((props: any) => {
-	model.setID(props.match.params.id);
+import { AbsoluteOverlay, RelativeOverlay, Image } from '../Gallery/styled';
 
-	model.recipe = recipe.data.filter((item) => {
-		return item._id === model.id;
-	});
+import { Link } from 'react-router-dom';
 
-	return (
-		model.recipe && (
-			<Container>
-				<ResponsiveContainer>
+const recipeDetails = (props: any) => {
+	return recipe.data
+		.filter((item) => {
+			return item._id === props.match.params.id;
+		})
+		.map((recipe) => {
+			return (
+				<>
 					<HeaderContainer>
-						<Category>{model.recipe && model.recipe[0].category}</Category>
-						<Title>{model.recipe && model.recipe[0].title}</Title>
+						<Category>{recipe.category}</Category>
+						<Title>{recipe.title}</Title>
 						<Description>Una descrizione fantastica</Description>
-						<Image src={model.recipe && model.recipe[0].image} />
+						<HeaderImage src={recipe.image} />
 					</HeaderContainer>
-
 					<Accordion
 						section={'Ingredienti'}
-						content={model.recipe[0].ingredients.map((item: any) => {
+						content={recipe.ingredients.map((item: any) => {
 							return (
 								<>
 									<li className='list-none '>
@@ -37,19 +46,49 @@ const Model = observer((props: any) => {
 					/>
 					<Accordion
 						section={'Descrizione'}
-						content={model.recipe[0].description.map((item: any) => {
+						content={recipe.description.map((item: any) => {
 							return (
 								<>
-									<li className='list-none '>
+									<li className='list-none'>
 										{item.step} - {item.instructions}
 									</li>
 								</>
 							);
 						})}
 					/>
-				</ResponsiveContainer>
-			</Container>
-		)
+				</>
+			);
+		});
+};
+
+const Model = observer((props: any) => {
+	return (
+		<Container>
+			<ResponsiveContainer>
+				{recipeDetails(props)}
+				<FlexWrapper>
+					{recipe.data
+						.filter((item) => {
+							return item._id !== props.match.params.id;
+						})
+						.map((item, key) => {
+							return key !== recipe.data.length - 1 && key < 5 ? (
+								<RelativeOverlay>
+									<Link to={`/recipe/${item._id}`}>
+										<AbsoluteOverlay $small={true}>{item.title}</AbsoluteOverlay>
+										<Image src={item.image} width='200' />
+									</Link>
+								</RelativeOverlay>
+							) : null;
+						})}
+				</FlexWrapper>
+				<ButtonWrapper>
+					<Link to={`/search`}>
+						<Button>Indietro</Button>
+					</Link>
+				</ButtonWrapper>
+			</ResponsiveContainer>
+		</Container>
 	);
 });
 

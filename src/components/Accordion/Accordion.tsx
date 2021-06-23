@@ -1,9 +1,11 @@
 import { observer } from 'mobx-react';
 import { BorderContainer, Button, Content, Title, Wrapper } from './styled';
 
-import model from '../../stores/Model.store';
+import { useState } from 'react';
 
 const Accordion = observer(({ section, content }: any) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<BorderContainer>
 			<Button
@@ -11,14 +13,14 @@ const Accordion = observer(({ section, content }: any) => {
 				aria-label='Open item'
 				title='Open item'
 				onClick={() => {
-					model.toggleAccordion();
+					setIsOpen(!isOpen);
 				}}
 			>
 				<Title>{section}</Title>
 				<svg
 					viewBox='0 0 24 24'
 					className={`w-3 text-gray-600 transform transition-transform duration-200 ${
-						model.isOpen ? 'rotate-180' : ''
+						isOpen ? 'rotate-180' : ''
 					}`}
 				>
 					<polyline
@@ -32,7 +34,7 @@ const Accordion = observer(({ section, content }: any) => {
 					/>
 				</svg>
 			</Button>
-			{model.isOpen && (
+			{isOpen && (
 				<Wrapper>
 					<Content>{content}</Content>
 				</Wrapper>
@@ -42,14 +44,3 @@ const Accordion = observer(({ section, content }: any) => {
 });
 
 export default Accordion;
-
-// {model.recipe &&
-// 	model.recipe[0].ingredients.map((item: any) => {
-// 		return (
-// 			<>
-// 				<li className='list-none '>
-// 					{item.ingredient} - {item.quantity}
-// 				</li>
-// 			</>
-// 		);
-// 	})}
