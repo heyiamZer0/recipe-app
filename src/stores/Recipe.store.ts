@@ -1,20 +1,28 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 
-class GalleryStore {
+class RecipeStore {
 	query: string = '';
 	data: any[] = [];
+	time: number = 120;
 
 	constructor() {
 		makeAutoObservable(this);
 	}
 
+	@action
 	setQuery = (query: string) => {
 		this.query = query;
 	};
 
+	@action
 	setData = (data: any[]) => {
 		this.data = data;
 	};
+
+	@action
+	setTime = (value: any) => {
+		this.time = value;
+	};
 }
 
-export default new GalleryStore();
+export default new RecipeStore();

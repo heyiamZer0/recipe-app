@@ -9,11 +9,13 @@ import {
 	AbsoluteOverlay,
 } from './styled';
 
+import { Filter } from '../';
+
 import { observer } from 'mobx-react';
 
 import { getRecipesByIngredients } from '../../services/api';
 
-import recipe from '../../stores/Gallery.store';
+import recipe from '../../stores/Recipe.store';
 import { Link } from 'react-router-dom';
 
 const Gallery = observer(() => {
@@ -36,13 +38,16 @@ const Gallery = observer(() => {
 					></Input>
 				</InputForm>
 			</InputWrapper>
-
+			<Filter section='Quanto tempo hai per cucinare?' onChange={recipe.setTime} />
+			{console.log(recipe.time)}
 			<GridContainer>
 				{recipe.data &&
-					// eslint-disable-next-line array-callback-return
-					recipe.data.map((item: any, key: number) => {
-						if (key !== recipe.data.length - 1)
-							return (
+					recipe.data
+						.filter((item: any) => {
+							return item.time <= recipe.time;
+						})
+						.map((item: any, key: number) => {
+							return key !== recipe.data.length - 1 ? (
 								<RelativeOverlay>
 									<Link to={`/recipe/${item._id}`}>
 										<AbsoluteOverlay $small={false} key={key}>
@@ -51,8 +56,8 @@ const Gallery = observer(() => {
 										<Image src={item.image} alt='' width='450' />
 									</Link>
 								</RelativeOverlay>
-							);
-					})}
+							) : null;
+						})}
 			</GridContainer>
 		</Container>
 	);

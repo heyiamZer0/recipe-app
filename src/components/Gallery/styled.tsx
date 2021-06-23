@@ -24,7 +24,6 @@ export const InputForm = tw.form`
     mb-5
     mx-auto
     text-gray-600
-
 `;
 
 export const Input = tw.input`

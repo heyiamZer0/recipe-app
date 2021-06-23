@@ -1,19 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import { Home, WhatWeDo } from '../pages';
 import { Header, Footer, Gallery, Model } from '../components';
-import tw from 'tailwind-styled-components';
-
-const FlexWrapper = tw.div`
- 	flex
- 	flex-col
- 	h-screen
- `;
-
-const FlexGrower = tw.div`
- 	flex-grow
- 	justify-center
- 	items-center	
- `;
+import { FlexWrapper, FlexGrower } from './styled';
 
 export default function Routes() {
 	return (

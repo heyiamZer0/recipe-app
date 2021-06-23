@@ -1,8 +1,14 @@
 import axios from 'axios';
 
 export const getRecipesByIngredients = async (query: string): Promise<any> => {
+	const words: any = query.replace(/\b[a-z]{0,1}\b/gim, '').match(/\b(\w+)\b/g);
+
+	if (words[1] === undefined) {
+		words[1] = '';
+	} else query = words[0];
+
 	return await axios
-		.get(`http://localhost:8090/recipe?first=${query}&second=`)
+		.get(`http://localhost:8090/recipe?first=${query}&second=${words[1]}`)
 		.then((response) => {
 			return response.data;
 		})
