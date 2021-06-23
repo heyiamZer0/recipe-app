@@ -1,9 +1,4 @@
-interface IOption {
-	name: string;
-	value: string | number;
-}
-
-interface IOptions extends Array<IOption> {}
+import { IOptions } from './types';
 
 export const timeOptions: IOptions = [
 	{

@@ -1,14 +1,24 @@
 import { action, makeAutoObservable } from 'mobx';
 import { getRecipesByIngredients } from '../services/api';
+import { IDescriptions, IIngredients, IRecipe } from '../utils/types';
 
-class RecipeStore {
+class RecipeStore implements IRecipe {
 	query: string = '';
-	data: any[] = [];
+	data: IRecipe[] = [];
 	time: number = 120;
 
 	constructor() {
 		makeAutoObservable(this);
 	}
+
+	_id!: string;
+	title!: string;
+	image!: string;
+	ingredients!: IIngredients;
+	description!: IDescriptions;
+	calories?: number | undefined;
+	category!: string;
+	difficulty!: string;
 
 	@action
 	setQuery = (query: string) => {
@@ -21,7 +31,7 @@ class RecipeStore {
 	};
 
 	@action
-	setTime = (value: any) => {
+	setTime = (value: number) => {
 		this.time = value;
 	};
 }

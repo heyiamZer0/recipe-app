@@ -17,6 +17,7 @@ import {
 import { AbsoluteOverlay, RelativeOverlay, Image } from '../Gallery/styled';
 
 import { Link } from 'react-router-dom';
+import { IDescription, IIngredient } from '../../utils/types';
 
 const recipeDetails = (props: any) => {
 	return recipe.data
@@ -34,7 +35,7 @@ const recipeDetails = (props: any) => {
 					</HeaderContainer>
 					<Accordion
 						section={'Ingredienti'}
-						content={recipe.ingredients.map((item: any) => {
+						content={recipe.ingredients.map((item: IIngredient) => {
 							return (
 								<li className='list-none ml-5 '>
 									{item.ingredient} - {item.quantity}
@@ -44,7 +45,7 @@ const recipeDetails = (props: any) => {
 					/>
 					<Accordion
 						section={'Descrizione'}
-						content={recipe.description.map((item: any) => {
+						content={recipe.description.map((item: IDescription) => {
 							return (
 								<li className='list-none ml-5'>
 									{item.step} - {item.instructions}
