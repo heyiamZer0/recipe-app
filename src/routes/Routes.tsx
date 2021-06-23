@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import { Home, WhatWeDo } from '../pages';
-import { Header, Footer, Gallery } from '../components';
+import { Header, Footer, Gallery, Model } from '../components';
 import tw from 'tailwind-styled-components';
 
 const FlexWrapper = tw.div`
@@ -24,6 +24,7 @@ export default function Routes() {
 					<Route path='/' exact component={Home} />
 					<Route path='/whatwedo' exact component={WhatWeDo} />
 					<Route path='/search' exact component={Gallery} />
+					<Route path='/recipe/:id?' component={Model} />
 				</Switch>
 			</FlexGrower>
 			<Footer></Footer>

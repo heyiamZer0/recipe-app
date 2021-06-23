@@ -33,3 +33,37 @@ export const Input = tw.input`
     rounded-lg
     text-sm
 `;
+
+export const RelativeOverlay = tw.div`
+    relative
+`;
+
+export const GridContainer = tw.div`
+    grid
+    lg:grid-cols-5
+    md:grid-cols-4
+    sm:grid-cols-3
+    p-5
+    border-t-2
+`;
+
+export const AbsoluteOverlay = tw.div`
+    absolute
+    bg-white
+    inset-0
+    z-10
+    flex
+    justify-center
+    text-xl
+    items-center
+    text-center
+    opacity-0
+    duration-100
+    ease-in-out
+    p-2
+    hover:opacity-90
+`;
+
+export const Image = tw.img`
+    z-0
+`;
