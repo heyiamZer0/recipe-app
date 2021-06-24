@@ -1,10 +1,10 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, computed, makeAutoObservable } from 'mobx';
 import { getRecipesByIngredients } from '../services/api';
-import { IDescriptions, IIngredients, IRecipe } from '../utils/types';
+import { IDescriptions, IIngredients, IRecipe, IRecipes } from '../utils/types';
 
 class RecipeStore implements IRecipe {
 	query: string = '';
-	data: IRecipe[] = [];
+	data: IRecipes = [];
 	time: number = 120;
 
 	constructor() {
@@ -20,6 +20,12 @@ class RecipeStore implements IRecipe {
 	category!: string;
 	difficulty!: string;
 
+	@computed get timeFilter() {
+		return this.data.filter((item) => {
+			return item.time <= this.time;
+		});
+	}
+
 	@action
 	setQuery = (query: string) => {
 		this.query = query;
@@ -27,12 +33,16 @@ class RecipeStore implements IRecipe {
 
 	@action
 	fetchData = async (query: string) => {
-		this.data = await getRecipesByIngredients(query);
+		try {
+			return (this.data = await getRecipesByIngredients(query));
+		} catch (error) {
+			return error;
+		}
 	};
 
 	@action
-	setTime = (value: number) => {
-		this.time = value;
+	setTime = (time: number) => {
+		this.time = time;
 	};
 }
 

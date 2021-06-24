@@ -1,7 +1,9 @@
 import { observer } from 'mobx-react';
+import { useEffect } from 'react';
+import { timeOptions } from '../../utils/constants';
+import { IRecipe } from '../../utils/types';
 import recipe from '../../stores/Recipe.store';
 import { Link } from 'react-router-dom';
-
 import { Filter } from '../';
 import {
 	Container,
@@ -13,15 +15,17 @@ import {
 	RelativeOverlay,
 	AbsoluteOverlay,
 } from './styled';
-import { timeOptions } from '../../utils/constants';
-import { IRecipe } from '../../utils/types';
 
 const Gallery = observer(() => {
+	useEffect(() => {
+		if (recipe.query === '') recipe.fetchData('burro');
+	}, []);
+
 	return (
 		<Container>
 			<InputWrapper>
 				<InputForm
-					onSubmit={async (e) => {
+					onSubmit={(e) => {
 						e.preventDefault();
 						recipe.fetchData(recipe.query);
 					}}
@@ -29,7 +33,7 @@ const Gallery = observer(() => {
 					<Input
 						type='search'
 						placeholder='Search'
-						onChange={async (e) => {
+						onChange={(e) => {
 							recipe.query = e.target.value;
 						}}
 					></Input>
@@ -38,22 +42,16 @@ const Gallery = observer(() => {
 			<Filter section='Quanto tempo hai per cucinare?' onChange={recipe.setTime} options={timeOptions} />
 			<GridContainer>
 				{recipe.data &&
-					recipe.data
-						.filter((item: IRecipe) => {
-							return item.time <= recipe.time;
-						})
-						.map((item: IRecipe, key: number) => {
-							return key !== recipe.data.length - 1 ? (
-								<RelativeOverlay>
-									<Link to={`/recipe/${item._id}`}>
-										<AbsoluteOverlay $small={false} key={key}>
-											{item.title}
-										</AbsoluteOverlay>
-										<Image src={item.image} width='450' />
-									</Link>
-								</RelativeOverlay>
-							) : null;
-						})}
+					recipe.timeFilter.map((item: IRecipe, key: number) => {
+						return key !== recipe.data.length - 1 ? (
+							<RelativeOverlay key={key}>
+								<Link to={`/recipe/${item._id}`}>
+									<AbsoluteOverlay $small={false}>{item.title}</AbsoluteOverlay>
+									<Image src={item.image} width='450' />
+								</Link>
+							</RelativeOverlay>
+						) : null;
+					})}
 			</GridContainer>
 		</Container>
 	);

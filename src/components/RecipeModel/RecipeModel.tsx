@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import recipe from '../../stores/Recipe.store';
-import { IDescription, IIngredient } from '../../utils/types';
+import { IDescription, IIngredient, IRecipe } from '../../utils/types';
 import Accordion from '../Accordion/Accordion';
 import { AbsoluteOverlay, RelativeOverlay, Image } from '../Gallery/styled';
 import {
@@ -14,7 +14,7 @@ import {
 	Title,
 	Button,
 	ButtonWrapper,
-	FlexWrapper,
+	RelatedFlexWrapper,
 } from './styled';
 
 const recipeDetails = (props: any) => {
@@ -22,9 +22,9 @@ const recipeDetails = (props: any) => {
 		.filter((item) => {
 			return item._id === props.match.params.id;
 		})
-		.map((recipe) => {
+		.map((recipe: IRecipe, key: number) => {
 			return (
-				<>
+				<div key={key}>
 					<HeaderContainer>
 						<Category>{recipe.category}</Category>
 						<Title>{recipe.title}</Title>
@@ -33,9 +33,9 @@ const recipeDetails = (props: any) => {
 					</HeaderContainer>
 					<Accordion
 						section={'Ingredienti'}
-						content={recipe.ingredients.map((item: IIngredient) => {
+						content={recipe.ingredients.map((item: IIngredient, key: number) => {
 							return (
-								<li className='list-none ml-5 '>
+								<li key={key} className='list-none ml-5 '>
 									{item.ingredient} - {item.quantity}
 								</li>
 							);
@@ -43,15 +43,15 @@ const recipeDetails = (props: any) => {
 					/>
 					<Accordion
 						section={'Descrizione'}
-						content={recipe.description.map((item: IDescription) => {
+						content={recipe.description.map((item: IDescription, key: number) => {
 							return (
-								<li className='list-none ml-5'>
+								<li key={key} className='list-none ml-5'>
 									{item.step} - {item.instructions}
 								</li>
 							);
 						})}
 					/>
-				</>
+				</div>
 			);
 		});
 };
@@ -61,25 +61,24 @@ const RecipeModel = observer((props: any) => {
 		<Container>
 			<ResponsiveContainer>
 				{recipeDetails(props)}
-				<FlexWrapper>
-					{recipe.data
+				<RelatedFlexWrapper>
+					{recipe.timeFilter
 						.filter((item) => {
 							return item._id !== props.match.params.id;
 						})
-						.filter((item) => {
-							return item.time <= recipe.time;
-						})
 						.map((item, key) => {
-							return key !== recipe.data.length - 1 && key < 5 ? (
-								<RelativeOverlay>
-									<Link to={`/recipe/${item._id}`}>
-										<AbsoluteOverlay $small={true}>{item.title}</AbsoluteOverlay>
-										<Image src={item.image} height='400' width='200' />
-									</Link>
-								</RelativeOverlay>
+							return key !== recipe.data.length - 1 && key < 4 ? (
+								<div key={key} className='m-auto'>
+									<RelativeOverlay>
+										<Link to={`/recipe/${item._id}`}>
+											<AbsoluteOverlay $small={true}>{item.title}</AbsoluteOverlay>
+											<Image src={item.image} width='250' />
+										</Link>
+									</RelativeOverlay>
+								</div>
 							) : null;
 						})}
-				</FlexWrapper>
+				</RelatedFlexWrapper>
 				<ButtonWrapper>
 					<Link to={`/search`}>
 						<Button>Indietro</Button>

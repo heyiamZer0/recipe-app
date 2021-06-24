@@ -62,7 +62,7 @@ export const Image = tw.img`
     rounded-md
 `;
 
-export const FlexWrapper = tw.div`
+export const RelatedFlexWrapper = tw.div`
     flex
     flex-row
     rounded-md
