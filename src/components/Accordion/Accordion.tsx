@@ -1,10 +1,10 @@
-import { observer } from 'mobx-react';
 import { BorderContainer, Button, Content, Title, Wrapper } from './styled';
+import { observer } from 'mobx-react';
 
-import { useState } from 'react';
+import { LocalStore } from '../../stores/Accordion.store';
 
 const Accordion = observer(({ section, content }: { section: string; content: Array<object> }) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const store = LocalStore();
 
 	return (
 		<BorderContainer>
@@ -13,14 +13,14 @@ const Accordion = observer(({ section, content }: { section: string; content: Ar
 				aria-label='Open item'
 				title='Open item'
 				onClick={() => {
-					setIsOpen(!isOpen);
+					store.toggle();
 				}}
 			>
 				<Title>{section}</Title>
 				<svg
 					viewBox='0 0 24 24'
 					className={`w-3 text-gray-600 transform transition-transform duration-200 ${
-						isOpen ? 'rotate-180' : ''
+						store.isOpen ? 'rotate-180' : ''
 					}`}
 				>
 					<polyline
@@ -34,7 +34,7 @@ const Accordion = observer(({ section, content }: { section: string; content: Ar
 					/>
 				</svg>
 			</Button>
-			{isOpen && (
+			{store.isOpen && (
 				<Wrapper>
 					<Content>{content}</Content>
 				</Wrapper>

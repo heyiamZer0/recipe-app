@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { timeOptions } from '../../utils/constants';
 import { IRecipe } from '../../utils/types';
 import recipe from '../../stores/Recipe.store';
@@ -25,16 +25,16 @@ const Gallery = observer(() => {
 		<Container>
 			<InputWrapper>
 				<InputForm
-					onSubmit={(e) => {
-						e.preventDefault();
+					onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+						event.preventDefault();
 						recipe.fetchData(recipe.query);
 					}}
 				>
 					<Input
 						type='search'
 						placeholder='Search'
-						onChange={(e) => {
-							recipe.query = e.target.value;
+						onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+							recipe.query = event.target.value;
 						}}
 					></Input>
 				</InputForm>
