@@ -9,7 +9,6 @@
 ## Built With
 * [ReactJS][react] - JS Library
 * [TailwindCSS][tailwind] - CSS framework
-* [Styled Components][styled] - CSS Modules
 * [TypeScript 4.0][typescript] - Codebase
 * [MobX][mobx] - State managment
 
